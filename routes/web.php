@@ -21,6 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth:sanctum'])->name('home');
 
 Route::get('/registerpage', function () {
     return view('register');

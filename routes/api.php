@@ -24,7 +24,8 @@ use Illuminate\Validation\ValidationException;
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('user', function (Request $request) {
         dd($request);

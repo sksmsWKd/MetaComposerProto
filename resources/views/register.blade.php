@@ -6,6 +6,7 @@
 <body>
     <div style="text-align: center">
 		<form action="{{ route('register') }}"method="POST">
+				@csrf
 			@method('POST')
         <h2>register</h2>
 		  <br>
