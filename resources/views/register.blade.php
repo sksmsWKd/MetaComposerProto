@@ -5,9 +5,8 @@
 </head>
 <body>
     <div style="text-align: center">
-		<form action="{{ route('register') }}"method="POST">
+		<form action="{{ route('register') }}"method="post">
 				@csrf
-			@method('POST')
         <h2>register</h2>
 		  <br>
 			<label for="email">email</label>
