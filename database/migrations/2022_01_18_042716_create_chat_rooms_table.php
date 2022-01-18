@@ -4,12 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLessonsTable extends Migration
+class CreateChatRoomsTable extends Migration
 {
-
-    //레슨 테이블
-
-
     /**
      * Run the migrations.
      *
@@ -17,15 +13,10 @@ class CreateLessonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lessons', function (Blueprint $table) {
+        Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('instructor_id')->constrained()->onDelete('cascade');
-            $table->string('introduce');
-            $table->time('length');
-            //setting
-
-            $table->double('price', 9, 2);
-            $table->string('name');
         });
     }
 
@@ -36,6 +27,6 @@ class CreateLessonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lessons');
+        Schema::dropIfExists('chat_rooms');
     }
 }

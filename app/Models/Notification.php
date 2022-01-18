@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SignUp extends Model
+class Notification extends Model
 {
     use HasFactory;
 
-    public function attendance_info_by_sign_up()
+    public function notifiable()
     {
-        return $this->hasMany(Attendance::class, 'user_id');
+        return $this->morphTo();
+        //모델 지정 안해도됨
     }
 }

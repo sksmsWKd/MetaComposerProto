@@ -10,10 +10,11 @@ class Lesson extends Model
     use HasFactory;
 
     protected $casts = [
-        'length'  =>  'time:H:00 I:00',
+        'length'  =>  'datetime:H:i',
     ];
     public function sign_up_list()
     {
         return $this->hasMany('SignUp');
+        //안되면 ::class , '외래키'
     }
 }

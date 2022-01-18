@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAttendancesTable extends Migration
 {
+
+
+    //출결 테이블
+
+
     /**
      * Run the migrations.
      *

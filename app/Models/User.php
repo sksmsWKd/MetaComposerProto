@@ -27,15 +27,15 @@ class User extends Authenticatable
 
     public function instructor()
     {
-        return $this->hasOne('Instructor');
+        return $this->hasOne(Instructor::class, 'user_id');
     }
 
-    public function my_lesson()
+    public function students_lesson()
     {
-        return $this->hasMany('SignUp');
+        return $this->hasMany(SignUp::class, 'user_id');
     }
     public function my_attandance()
     {
-        return $this->hasMany('Attendance');
+        return $this->hasMany(Attendance::class, 'user_id');
     }
 }

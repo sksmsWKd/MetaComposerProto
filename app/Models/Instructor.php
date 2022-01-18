@@ -9,8 +9,8 @@ class Instructor extends Model
 {
     use HasFactory;
 
-    public function lessons()
+    public function teachers_lessons()
     {
-        return $this->hasMany('Lesson');
+        return $this->hasMany(Lesson::class, 'instructor_id');
     }
 }

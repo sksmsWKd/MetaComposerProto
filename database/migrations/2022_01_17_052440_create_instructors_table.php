@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateInstructorsTable extends Migration
 {
+
+    //강사테이블
+
+
+
     /**
      * Run the migrations.
      *
