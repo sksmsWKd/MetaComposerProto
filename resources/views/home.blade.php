@@ -1,4 +1,4 @@
-<h2>Hi</h2>
+<h2></h2>
 <h3>Your Info :
     {{ Auth::user() }}</h3>
 <h2>
@@ -13,6 +13,9 @@
 </h2>
 <h2>
 	Lesson you have opened : 
-	{{  Auth::user()->instructor->teachers_lessons }}
+  	{{-- {{  Auth::user()->instructor->teachers_lessons }} --}}
+
 </h2>
+<h2>{{ Auth::user()}}</h2>
+
  

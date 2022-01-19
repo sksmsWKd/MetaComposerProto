@@ -7,7 +7,8 @@
     <div style="text-align: center">
 		<form action="{{ route('login') }}"method="post">
 			@csrf
-        <h2>login</h2>
+			@method('POST')
+        <h2></h2>
 		  <br>
 			<label for="email">email</label>
 		  <input type="text" id="email"name="email"> 

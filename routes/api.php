@@ -20,14 +20,28 @@ use Illuminate\Validation\ValidationException;
 
 
 
+// Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// Route::post('register', [AuthController::class, 'register'])->name('register');
+// Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::post('register', [AuthController::class, 'register'])->name('register');
-Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+// Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'api'], function () {
+//     Route::post('logout', [AuthController::class, 'logout'])->name('api.logout');
+//     Route::post('user', function (Request $request) {
+//         dd($request);
+//     })->name('user');
+// });
 
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('user', function (Request $request) {
-        dd($request);
-    })->name('user');
+
+
+// Route::post('user', function (Request $request) {
+//     dd($request);
+// })->name('user');
+Route::group(['middleware' => 'api'], function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::post('/profile', [AuthController::class, 'profile']);
+    Route::get('/user', [AuthController::class, 'user']);
 });

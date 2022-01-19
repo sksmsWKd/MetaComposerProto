@@ -6,8 +6,9 @@
 <body>
     <div style="text-align: center">
 		<form action="{{ route('register') }}"method="post">
+			@method('POST')
 				@csrf
-        <h2>register</h2>
+        <h2></h2>
 		  <br>
 			<label for="email">email</label>
 		  <input type="text" id="email"name="email"> 
