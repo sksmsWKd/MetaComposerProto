@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -44,4 +45,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/profile', [AuthController::class, 'profile']);
     Route::get('/user', [AuthController::class, 'user']);
+
+
+
+    Route::get('/googleauth', [GoogleAuthController::class, 'redirect'])->name('google.login');
 });
