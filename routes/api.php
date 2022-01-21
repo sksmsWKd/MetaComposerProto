@@ -39,14 +39,14 @@ use Illuminate\Validation\ValidationException;
 //     dd($request);
 // })->name('user');
 Route::group(['middleware' => 'api'], function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/profile', [AuthController::class, 'profile']);
-    Route::get('/user', [AuthController::class, 'user']);
-
-
-
-    Route::get('/googleauth', [GoogleAuthController::class, 'redirect'])->name('google.login');
+    Route::get('/user', [AuthController::class, 'user'])->name('user');
+});
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/google/auth', [GoogleAuthController::class, 'redirect'])->name('google.login');
+    Route::get('/google/callback', [GoogleAuthController::class, 'callback']);
 });

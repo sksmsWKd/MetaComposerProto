@@ -368,6 +368,16 @@
 
                     
                 </form>
+
+
+                <form action="{{ route('google.login') }}" method="get">
+                
+                         @csrf
+                    <button>google.login</button>
+
+                    
+                </form>
+ 
                 <br>
                 <br>
                 <br>
