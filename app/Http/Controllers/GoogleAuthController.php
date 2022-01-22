@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
-
-
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class GoogleAuthController extends Controller
 {
@@ -99,7 +98,9 @@ class GoogleAuthController extends Controller
 
 
 
-        return redirect();
+
+
+        return redirect('/');
 
         //원래 의도했던 사이트로 이동 , 없다면 default 로 
 

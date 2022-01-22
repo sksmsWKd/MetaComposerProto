@@ -361,15 +361,15 @@
                
 
 
-                <form action="{{ route('user') }}" method="post">
+                <form action="{{ route('home') }}" method="get">
                 
                          @csrf
-                    <button>user</button>
+                    <button>home</button>
 
                     
                 </form>
 
-
+  @if (Auth::user()==null)
                 <form action="{{ route('google.login') }}" method="get">
                 
                          @csrf
@@ -377,13 +377,14 @@
 
                     
                 </form>
- 
+ @endif
                 <br>
                 <br>
                 <br>
                 <div>
-                   
- <form action="{{ route('logout') }}" method="POST">@method('POST') @csrf <button>logout</button> </form>
+                     @if (Auth::user()!=null)
+ <form action="{{ route('logout') }}" method="post">@method('POST') @csrf <button>logout</button> </form>
+ @endif
                 </div>
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <svg

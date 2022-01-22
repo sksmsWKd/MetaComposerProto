@@ -12,6 +12,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
+
+    protected $table = "users";
     protected $fillable = [
         'name',
         'email',
@@ -57,10 +59,14 @@ class User extends Authenticatable implements JWTSubject
         //     'name' => $this->name
         // ];
 
+
+
+        return [];
+
         // php artisan jwt:secret
         // and after:
         // php artisan clear-compiled && php artisan optimize
 
-        return [];
+        // return [];
     }
 }

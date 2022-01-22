@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -96,7 +97,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'logout', 'user']]);
     }
 
     /**
@@ -106,6 +107,79 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email|max:255',
+        //     'password' => 'required|string|min:8|max:255',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'messages' => $validator->messages()
+        //     ], 200);
+        // }
+
+        // if (!$token = Auth::guard('api')->attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+
+
+        // return $this->respondWithToken($token);
+
+        // // dd(Auth::user());
+
+
+
+        // $request->header('Authorization', "Bearer " . $request->bearerToken());
+
+        // return redirect('/')->headers->set('Authorization', 'Bearer ' . $request->cookie($jwt_token));
+        // return redirect();
+        // return response()->json([
+        //     'success' => true,
+        //     'token' => $jwt_token,
+        // ]);
+
+        //             mmmmmmmmmmmm
+        //         $input = $request->only('email', 'password');
+        //         $jwt_token = null;
+
+        //         if (!$jwt_token = JWTAuth::attempt($input)) {
+        //             return response()->json([
+        //                 'success' => false,
+        //                 'message' => 'Invalid Email or Password',
+        //             ], Response::HTTP_UNAUTHORIZED);
+        //         }
+        //         $user = Auth::user();
+
+        //         Auth::setUser($user);
+        //         return $this->respondWithToken($jwt_token);
+
+        // mmmmmmmmmmmmmmm
+
+
+
+        // $credentials = request(['email', 'password']);
+
+        // if (!$token = auth()->attempt($credentials)) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+
+        // $user = Auth::user();
+
+        // Auth::setUser($user);
+        // return $this->respondWithToken($token);
+
+        //under this line code returns full token but can't maintain login
+
+        // $credentials = $request->only('email', 'password');
+
+        // if ($token = JWTAuth::attempt($credentials)) {
+        //     return $this->respondWithToken($token);
+        // }
+
+        // return response()->json(['error' => 'Unauthorized'], 401);
+
+        //under this code can maintain login but can't return full token
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
@@ -129,18 +203,21 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'status' => 'error',
+                'messages' => $validator->messages()
+            ], 200);
         }
 
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
+        $user = new User;
+        $user->fill($request->all());
+        $user->password = bcrypt($request->password);
+        $user->save();
 
         return response()->json([
-            'message' => 'User registered successfully',
-            'user' => $user
-        ], 201);
+            'status' => 'success',
+            'data' => $user
+        ], 200);
     }
 
     /**
@@ -150,7 +227,12 @@ class AuthController extends Controller
      */
     public function user()
     {
-        return response()->json(auth()->user());
+        // return response()->json(auth()->user());
+        $user = User::find(Auth::user()->id);
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ]);
     }
 
     /**
@@ -187,8 +269,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => 1200,
-            'user' => auth()->user()
+            'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             // auth()->guard('api')->factory()->getTTL() * 
         ]);
     }

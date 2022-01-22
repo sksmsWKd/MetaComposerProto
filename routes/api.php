@@ -43,7 +43,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/profile', [AuthController::class, 'profile']);
+
     Route::get('/user', [AuthController::class, 'user'])->name('user');
 });
 Route::group(['middleware' => ['web']], function () {

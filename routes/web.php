@@ -5,6 +5,7 @@ use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
+
     return view('home');
 })->name('home');
 
