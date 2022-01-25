@@ -15,6 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
+        //web 해야 앱 탐색중 엑세스 토큰도 이동
         'passwords' => 'users',
     ],
 
@@ -44,7 +45,7 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
-            'hash' => false,
+            // 'hash' => false,
         ],
     ],
 

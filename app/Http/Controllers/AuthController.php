@@ -182,12 +182,15 @@ class AuthController extends Controller
         //under this code can maintain login but can't return full token
         $credentials = request(['email', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (auth()->attempt($credentials)) {
+
+
+
+            $token = JWTAuth::attempt($credentials);
+            return $this->respondWithToken($token);
+        } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-
-        return $this->respondWithToken($token);
     }
     public function register(Request $request)
     {

@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
 
     protected $table = "users";
@@ -54,14 +54,14 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTCustomClaims()
     {
-        // return [
-        //     'email' => $this->email,
-        //     'name' => $this->name
-        // ];
+        return [
+            'email' => $this->email,
+            'name' => $this->name
+        ];
 
 
 
-        return [];
+        // return [];
 
         // php artisan jwt:secret
         // and after:
